@@ -25,11 +25,17 @@ class Support extends Component {
 
     render() {
         return (
-            <div>
-                <HomeHeader/>
-                <iframe src="http://localhost:3002/" width="100%" height="645px" name="the-iframe" frameborder="0"></iframe>
-            </div>
-        )
+          <div>
+            <HomeHeader />
+            <iframe
+              id="dialog"
+              width="100%"
+              height="645"
+              src="https://console.dialogflow.com/api-client/demo/embedded/4d61c832-6485-4eea-a373-bc025dde37f3"
+            ></iframe>
+            {/* <iframe src="http://localhost:3002/" width="100%" height="645px" name="the-iframe" frameborder="0"></iframe> */}
+          </div>
+        );
     }
 }
 
