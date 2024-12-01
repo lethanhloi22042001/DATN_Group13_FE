@@ -13,7 +13,8 @@
         height: 80px;
         top: 0;
         position: fixed;
-        background: #fff;
+        //background: #fff;
+        background: rgb(236,255,250);
         z-index: 100;
 
         .left-content {
@@ -25,14 +26,14 @@
                 height: 75px;
                 width: 75px;
                 cursor: pointer;
-                margin-left: 110px;
+                margin-left: 20px;
             }
 
             i {
-                font-size: 25px;
+                font-size: 32px;
                 color: gray;
                 cursor: pointer;
-                margin-left: 30px;
+                margin-left: 130px;
             }
         }
 
@@ -82,55 +83,65 @@
                     font-weight: 500;
                 }
             }
-
+ 
             .flag {
                 display: flex;
-
-                .language-vi {
-                    cursor: pointer;
-                    opacity: 0.2;
-
-                    &.active {
-                        opacity: 1;
-
-                        span {
-                            color: red;
-
-                        }
-                    }
-
-                    &:hover {
-                        opacity: 1;
-                        color: red;
-
-                    }
-                }
-
+                // box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                border-radius: 12px;
+                .language-vi,
                 .language-en {
                     cursor: pointer;
                     opacity: 0.2;
-
+                    width: 50px; /* Kích thước nút */
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 10px; /* Tạo nút vuông tròn */
+                    transition: all 0.3s ease-in-out; /* Hiệu ứng mượt */
+            
                     &.active {
                         opacity: 1;
-
+                        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5); /* Shadow màu trắng sữa */
+                        background-color: #f9f9f9; /* Màu nền nhạt để nổi bật */
                         span {
-                            color: rgb(119, 171, 233);
-
+                            color: red;
                         }
                     }
-
+            
                     &:hover {
                         opacity: 1;
-                        color: rgb(119, 171, 233);
-
+                        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5); /* Shadow khi hover */
+                        background-color: #f2f2f2; /* Thêm hiệu ứng nền */
                     }
                 }
-
+            
+                .language-vi {
+                    span {
+                        font-weight: bold; /* Tùy chỉnh kiểu chữ */
+                    }
+                }
+            
+                .language-en {
+                    span {
+                        font-weight: bold;
+                    }
+            
+                    &.active span {
+                        color: rgb(119, 171, 233);
+                    }
+            
+                    &:hover {
+                        color: rgb(119, 171, 233);
+                    }
+                }
+            
                 div {
                     margin-right: 5px;
                 }
-
             }
+            
         }
     }
 }
@@ -139,7 +150,7 @@
     background: url('../../assets/images/backgroundIM/6.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 650px;
+    height: 680px;
     width: 100%;
     background-position: center;
     padding-top: 70px;
@@ -172,7 +183,7 @@
             width: fit-content;
             align-items: center;
             justify-content: center;
-            background-color: #abde5f;
+            background-color: rgb(170, 230, 240);
             margin: 0 auto;
             padding: 17px;
             width: 500px;
