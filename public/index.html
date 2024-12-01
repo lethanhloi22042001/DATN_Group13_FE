@@ -35,12 +35,27 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <df-messenger
+    <!-- <df-messenger
       intent="WELCOME"
       chat-title="HealthCare"
       agent-id="4d61c832-6485-4eea-a373-bc025dde37f3"
       language-code="en"
-    ></df-messenger>
+    ></df-messenger> -->
   </body>
   <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+  <script>
+    // Dynamically create the df-messenger element
+    const dfMessenger = document.createElement('df-messenger');
+    dfMessenger.setAttribute('intent', 'WELCOME');
+    dfMessenger.setAttribute('chat-title', 'HealthCare');
+    dfMessenger.setAttribute('agent-id', '4d61c832-6485-4eea-a373-bc025dde37f3');
+    dfMessenger.setAttribute('language-code', 'en');
+
+    // Hide chatbot in admin page
+    const listPaths = ['/login', '/doctor/manage-schedule', '/doctor/manage-patient'];
+    if (!listPaths.includes(window.location.pathname) && !window.location.pathname.includes('system')) {
+      // Append the element to the body
+      document.body.appendChild(dfMessenger);
+    }
+  </script>
 </html>
