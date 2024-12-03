@@ -11,7 +11,8 @@
         "handbook": "Cẩm Nang",
         "handbook-des": "Cẩm nang sức khỏe",
         "support": "Hỗ trợ",
-        "welcome": "Xin chào "
+        "welcome": "Xin chào ",
+        "appointment-schedule": "Lịch hẹn"
     },
     "banner": {
         "title1": "NỀN TẢNG Y TẾ",
@@ -108,6 +109,15 @@
             "support-content": "Tạo mới một tài khoản, tiến hành tìm kiếm support và yêu cầu được tư vấn",
             "click-here": "Ấn vào đây",
             "support": "Hỗ trợ"
+        },
+        "appointment-schedule": {
+            "title": "Lịch hẹn đã đặt",
+            "no-data": "Bạn chưa đặt lịch hẹn trên trình duyệt này!",
+            "examination": "Khám",
+            "patient": "Bệnh nhân",
+            "doctor": "Bác sĩ",
+            "place": "Nơi khám",
+            "booked": "Đã đặt khám"
         }
     },
     "admin": {

@@ -11,7 +11,8 @@
         "handbook": "Handbook",
         "handbook-des": "Health handbook",
         "support": "Support",
-        "welcome": "What's up, "
+        "welcome": "What's up, ",
+        "appointment-schedule": "Appointment schedule"
     },
     "banner": {
         "title1": "MEDICAL PLATFORM",
@@ -108,6 +109,15 @@
             "support-content": "Create a new account, search for support and ask for advice",
             "click-here": "Click here",
             "support": "Support"
+        },
+        "appointment-schedule": {
+            "title": "Appointment scheduled",
+            "no-data": "You haven't booked an appointment in this browser yet!",
+            "examination": "Examination",
+            "patient": "Patient",
+            "doctor": "Doctor",
+            "place": "Place of examination",
+            "booked": "Examination booked"
         }
     },
     "admin": {

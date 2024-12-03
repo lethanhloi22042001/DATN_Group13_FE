@@ -7,7 +7,7 @@ class HomeFooter extends Component {
     render() {
         return (
             <div className='home-footer'>
-                <p>&copy; 2022 HealthCare TrungTan. <a className='more-info' href='#'>More information...</a></p>
+                <p>&copy; 2024 HealthCare ThanhLoi. <a className='more-info' href='#'>More information...</a></p>
             </div>
         );
     }

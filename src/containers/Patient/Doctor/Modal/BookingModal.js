@@ -126,6 +126,10 @@ class BookingModal extends Component {
             this.setState({
                 isShowLoading: false
             })
+            const appointmentIds = JSON.parse(localStorage.getItem('appointment_ids')) || [];
+            if (res?.data?.user) {
+                localStorage.setItem('appointment_ids', JSON.stringify([...appointmentIds, res?.data?.user?.id]));
+            }
             toast.success('Successful appointment!')
             this.props.closeModalBookingModal()
         } else {

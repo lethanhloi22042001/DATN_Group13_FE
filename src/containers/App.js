@@ -24,6 +24,7 @@ import Support from "./Patient/Support/Support";
 import SupportChatPage from "./Patient/Support/SupportChatPage";
 import DetailHandbook from "./Patient/Handbook/DetailHandbook";
 import UserForm from "./Register/UserForm.js";
+import AppointmentSchedulePage from "./Patient/AppointmentSchedule/AppointmentSchedule.jsx";
 
 class App extends Component {
   handlePersistorState = () => {
@@ -82,6 +83,7 @@ class App extends Component {
                     path={path.VERIFY_EMAIL_BOOKING}
                     component={VerifyEmail}
                   />
+                  <Route path={"/appoinment-schedule"} component={AppointmentSchedulePage} />
                   <Route path={"/support/chat-page"} component={Support} />
                   <Route path={"/support"} component={SupportChatPage} />
                 </Switch>

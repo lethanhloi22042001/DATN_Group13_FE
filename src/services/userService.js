@@ -149,6 +149,10 @@ const updateStatusPatient = (data) => {
   return axios.post('/api/update-patient-status', data);
 };
 
+const getListPatientByUserId = (data) => {
+  return axios.get(`/api/get-list-patient-by-user-id?ids=${data.appoinmentIds}`);
+};
+
 export {
   handldLoginApi,
   getAllUsers,
@@ -177,4 +181,5 @@ export {
   registerApi,
   getAllPatientForManage,
   updateStatusPatient,
+  getListPatientByUserId,
 };

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 import "./Homeheader.scss";
 import logo1 from "../../assets/logo2.png";
 import khamchuyenkhoa from "../../assets/images/icons/phongkhamchuyenkhoa.png";
@@ -8,6 +9,7 @@ import khamtongquat from "../../assets/images/icons/khamtongquat.png";
 import khamtuxa from "../../assets/images/icons/khamtuxa.png";
 import suckhoetinhthan from "../../assets/images/icons/suckhoetinhthan.png";
 import dichvuxetnghiem from "../../assets/images/icons/dichvuxetnghiem.png";
+import appointment from "../../assets/images/appointment.svg";
 import { FormattedMessage } from "react-intl";
 import { LANGUAGES } from "../../utils";
 import { withRouter } from "react-router";
@@ -52,12 +54,7 @@ class HomeHeader extends Component {
           <div className="home-header-content">
             <div className="left-content">
               <i className="fas fa-bars"></i>
-              <img
-                src={logo1}
-                className="header-logo"
-                alt=""
-                onClick={() => this.returnToHomePage()}
-              ></img>
+              <img src={logo1} className="header-logo" alt="" onClick={() => this.returnToHomePage()}></img>
             </div>
             <div className="center-content">
               <a href="#section-specialty" className="child-content">
@@ -100,7 +97,7 @@ class HomeHeader extends Component {
                   <FormattedMessage id="homeheader.handbook-des" />
                 </div>
               </a>
-              <div className="child-content">
+              {/* <div className="child-content">
                 <div>
                   <b>
                     <FormattedMessage id="homeheader.medical-package" />
@@ -109,38 +106,23 @@ class HomeHeader extends Component {
                 <div className="subs-title">
                   <FormattedMessage id="homeheader.generalHC" />
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="right-content">
-              <div
-                className="support"
-                onClick={() => this.handleViewSupportPage()}
-              >
+              <Link to="/appoinment-schedule" className="appoinment-schedule">
+                <img src={appointment} alt="" />
+                <span><FormattedMessage id="homeheader.appointment-schedule" /></span>
+              </Link>
+              <div className="support" onClick={() => this.handleViewSupportPage()}>
                 <i className="fa fa-question-circle"></i>
                 <FormattedMessage id="homeheader.support" />
               </div>
               <div className="flag">
-                <div
-                  className={
-                    language === LANGUAGES.VI
-                      ? "language-vi active"
-                      : "language-vi"
-                  }
-                >
-                  <span onClick={() => this.changeLanguage(LANGUAGES.VI)}>
-                    VN
-                  </span>
+                <div className={language === LANGUAGES.VI ? 'language-vi active' : 'language-vi'}>
+                  <span onClick={() => this.changeLanguage(LANGUAGES.VI)}>VN</span>
                 </div>
-                <div
-                  className={
-                    language === LANGUAGES.EN
-                      ? "language-en active"
-                      : "language-en"
-                  }
-                >
-                  <span onClick={() => this.changeLanguage(LANGUAGES.EN)}>
-                    EN
-                  </span>
+                <div className={language === LANGUAGES.EN ? 'language-en active' : 'language-en'}>
+                  <span onClick={() => this.changeLanguage(LANGUAGES.EN)}>EN</span>
                 </div>
               </div>
             </div>
