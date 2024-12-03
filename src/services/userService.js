@@ -141,6 +141,14 @@ const postSendRemedy = (data) => {
   return axios.post("/api/send-remedy", data);
 };
 
+const getAllPatientForManage = (data) => {
+  return axios.get(`/api/get-list-patient-for-manage?statusId=${data.statusId}&date=${data.date}`);
+};
+
+const updateStatusPatient = (data) => {
+  return axios.post('/api/update-patient-status', data);
+};
+
 export {
   handldLoginApi,
   getAllUsers,
@@ -167,4 +175,6 @@ export {
   getAllPatientForDoctor,
   postSendRemedy,
   registerApi,
+  getAllPatientForManage,
+  updateStatusPatient,
 };
