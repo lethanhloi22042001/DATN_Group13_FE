@@ -23,6 +23,7 @@
 }
 
 .slick-next {
+    top: 90px !important;
     right: -5px !important;
     z-index: 10 !important;
     height: 40px !important;
@@ -33,7 +34,6 @@
     justify-content: center !important;
     align-items: center !important;
     transition: 0.2s linear !important;
-
     &:hover {
         background: #eceaea !important;
         right: -10px !important;
@@ -48,18 +48,19 @@
     }
 
     .section-body {
-
         .section-customize {
             cursor: pointer;
-
+            margin-left: 8px;
             .bg-image {
-                width: 315px;
-                height: 180px;
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+                width: 278px;
+                height: 190px;
                 background-size: cover;
                 background-color: #eee;
                 background-repeat: no-repeat;
                 background-position: center center;
-
+                border-radius: 20px;
+                border : 1px solid transparent;
                 &.section-specialty {
                     // background-image: url('../../assets/images/specialty/specialty_1.jpg');
                 }
@@ -70,9 +71,9 @@
 
                 &.section-outstanding-doctor {
                     // background-image: url('../../assets/images/doctor/doctorStrange.jpg');
-                    width: 120px;
-                    height: 120px;
-                    border-radius: 50%;
+                    // width: 120px;
+                    // height: 120px;
+                    // border-radius: 10px;
                 }
 
                 &.section-handbook {
@@ -100,9 +101,9 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-
+        
         .section-header {
-            height: 80px;
+            height: 60px;
             margin-bottom: 20px;
             padding-top: 20px;
             display: flex;
@@ -117,8 +118,8 @@
             button {
                 position: relative;
                 background: transparent;
-                color: #abde5f;
-                border: 2px solid #abde5f;
+                color: rgb(152,215,237);
+                border: 2px solid rgb(152,215,237);
                 padding: 8px 16px;
                 height: 30px;
                 text-align: center;

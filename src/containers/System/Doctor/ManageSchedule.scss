@@ -1,4 +1,8 @@
 .manage-schedule-container {
+    position: absolute;
+  inset: 0; /* Chiếm toàn bộ diện tích của phần tử cha */
+  z-index: 0; /* Đặt dưới phần tử A nếu cần */
+  background-color: rgb(236,255,250); 
     .m-s-title {
         text-transform: uppercase;
         margin-top: 15px;

@@ -2,10 +2,12 @@
     // background-color: #abde5f;
 
     .description-specialty {
-        background-color: white !important;
+        // background-color: rgb(236,255,250) !important;
+        background: linear-gradient(to right, rgb(215, 244, 178), rgb(209, 246, 182)) !important;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         padding: 20px;
         margin: 15px 0;
-
+        border-radius: 10px;
         h1,
         h2,
         h3 {
@@ -42,6 +44,7 @@
         margin: 15px 0;
         box-shadow: 0 1px 6px #20212447;
         background-color: #fff;
+        opacity: 1;
         border-radius: 8px;
         border: 1px solid #f4f4f4;
         padding: 10px;
