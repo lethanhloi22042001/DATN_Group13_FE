@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./Homeheader.scss";
 import logo1 from "../../assets/logo2.png";
 import khamchuyenkhoa from "../../assets/images/icons/phongkhamchuyenkhoa.png";
@@ -18,6 +18,17 @@ import { changeLanguageApp } from "../../store/actions/appActions";
 import SearchDoctorByName from "../../components/Search/SearchDoctorByName";
 
 class HomeHeader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showNav: false, // Trạng thái hiển thị thanh nav
+    };
+  }
+  toggleNav = () => {
+    this.setState((prevState) => ({
+      showNav: !prevState.showNav, // Đảo trạng thái hiển thị
+    }));
+  };
   changeLanguage = (language) => {
     this.props.changeLanguageAppRedux(language);
     // fire redux event(actions)
@@ -53,8 +64,13 @@ class HomeHeader extends Component {
         <div className="home-header-container">
           <div className="home-header-content">
             <div className="left-content">
-              <i className="fas fa-bars"></i>
-              <img src={logo1} className="header-logo" alt="" onClick={() => this.returnToHomePage()}></img>
+              <i className="fas fa-bars" onClick={this.toggleNav}></i>
+              <img
+                src={logo1}
+                className="header-logo"
+                alt=""
+                onClick={() => this.returnToHomePage()}
+              ></img>
             </div>
             <div className="center-content">
               <a href="#section-specialty" className="child-content">
@@ -111,23 +127,55 @@ class HomeHeader extends Component {
             <div className="right-content">
               <Link to="/appoinment-schedule" className="appoinment-schedule">
                 <img src={appointment} alt="" />
-                <span><FormattedMessage id="homeheader.appointment-schedule" /></span>
+                <span>
+                  <FormattedMessage id="homeheader.appointment-schedule" />
+                </span>
               </Link>
-              <div className="support" onClick={() => this.handleViewSupportPage()}>
+              <div
+                className="support"
+                onClick={() => this.handleViewSupportPage()}
+              >
                 <i className="fa fa-question-circle"></i>
                 <FormattedMessage id="homeheader.support" />
               </div>
               <div className="flag">
-                <div className={language === LANGUAGES.VI ? 'language-vi active' : 'language-vi'}>
-                  <span onClick={() => this.changeLanguage(LANGUAGES.VI)}>VN</span>
+                <div
+                  className={
+                    language === LANGUAGES.VI
+                      ? "language-vi active"
+                      : "language-vi"
+                  }
+                >
+                  <span onClick={() => this.changeLanguage(LANGUAGES.VI)}>
+                    VN
+                  </span>
                 </div>
-                <div className={language === LANGUAGES.EN ? 'language-en active' : 'language-en'}>
-                  <span onClick={() => this.changeLanguage(LANGUAGES.EN)}>EN</span>
+                <div
+                  className={
+                    language === LANGUAGES.EN
+                      ? "language-en active"
+                      : "language-en"
+                  }
+                >
+                  <span onClick={() => this.changeLanguage(LANGUAGES.EN)}>
+                    EN
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {/* Thanh nav dọc */}
+        {this.state.showNav && (
+          <div className="vertical-nav">
+            <Link to="/login" className="nav-button">
+              Login dành cho Admin
+            </Link>
+            <Link to="/login" className="nav-button">
+              Login dành cho Bác Sĩ
+            </Link>
+          </div>
+        )}
         {this.props.isShowBanner === true && (
           <div className="home-header-banner">
             <div className="content-up">

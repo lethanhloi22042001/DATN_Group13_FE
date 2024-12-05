@@ -1,3 +1,4 @@
 {
-  "dart.autoImportCompletions": true
+  "dart.autoImportCompletions": true,
+  "CodeGPT.apiKey": "CodeGPT Plus Beta"
 }
