@@ -167,12 +167,13 @@
 }
 
 .home-header-banner {
-    background: url('../../assets/images/backgroundIM/6.jpg');
+    // background: url('../../assets/images/backgroundIM/6.jpg');
+    background: url('../../containers/Auth/loginTheme.webp');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     height: 680px;
     width: 100%;
-    background-position: center;
     padding-top: 70px;
     display: flex;
     flex-direction: column;

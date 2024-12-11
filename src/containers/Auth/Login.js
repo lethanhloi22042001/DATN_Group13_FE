@@ -7,6 +7,22 @@ import * as actions from "../../store/actions";
 import "./Login.scss";
 import { FormattedMessage } from "react-intl";
 import { handldLoginApi } from "../../services/userService";
+import { Formik } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().email("Email không hợp lệ").required("Email là bắt buộc"),
+  password: Yup.string()
+    // .min(8, "Mật khẩu phải có ít nhất 3 ký tự")
+    // .matches(/[A-Z]/, "Mật khẩu phải có ít nhất một chữ cái viết hoa")
+    // .matches(/[a-z]/, "Mật khẩu phải có ít nhất một chữ cái viết thường")
+    // .matches(/[0-9]/, "Mật khẩu phải có ít nhất một chữ số")
+    .matches(
+      /[!@#$%^&*(),.?":{}|<>]/,
+      "Mật khẩu phải có ít nhất một ký tự đặc biệt"
+    )
+    .required("Mật khẩu là bắt buộc"),
+});
 
 class Login extends Component {
   constructor(props) {
@@ -73,61 +89,77 @@ class Login extends Component {
     return (
       <div className="login-background">
         <div className="login-container">
-          <div className="login-content">
-            <div className="col-12 text-login">Login</div>
-            <div className="col-12 form-group login-input">
-              <lable>Username:</lable>
-              <input
-                placeholder="Enter your username..."
-                type="text"
-                className="form-control"
-                value={this.state.username}
-                onChange={(event) => this.handleOnChangeUsername(event)}
-              />
-            </div>
-            <div className="col-12 form-group login-input">
-              <lable>Password:</lable>
-              <div className="custom-input-password">
-                <input
-                  className="form-control"
-                  placeholder="Enter your password..."
-                  type={this.state.isShowPassowrd ? "text" : "password"}
-                  value={this.state.password}
-                  onChange={(event) => this.handleOnChangePassword(event)}
-                  onKeyDown={(e) => this.handleKeyDown(e)}
-                />
-                <span
-                  onClick={() => {
-                    this.handleShowHidePassword();
-                  }}
-                >
-                  <i
-                    className={
-                      this.state.isShowPassowrd
-                        ? "far fa-eye"
-                        : "far fa-eye-slash"
-                    }
-                  ></i>
-                </span>
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            validationSchema={validationSchema}
+          >
+            {({ values, errors, touched, handleChange, handleBlur }) => (
+              <div className="login-content">
+                <div className="col-12 text-login">Login</div>
+                <div className="col-12 form-group login-input">
+                  <lable>Username:</lable>
+                  <input
+                    placeholder="Enter your username..."
+                    type="text"
+                    className="form-control"
+                    value={this.state.username}
+                    onChange={(event) => this.handleOnChangeUsername(event)}
+                    name="email"
+                    onBlur={handleBlur}
+                  />
+                  {errors.email && (
+                    <div style={{ color: "red" }}>{errors.email}</div>
+                  )}
+                </div>
+                <div className="col-12 form-group login-input">
+                  <lable>Password:</lable>
+                  <div className="custom-input-password">
+                    <input
+                      className="form-control"
+                      placeholder="Enter your password..."
+                      type={this.state.isShowPassowrd ? "text" : "password"}
+                      value={this.state.password}
+                      onChange={(event) => this.handleOnChangePassword(event)}
+                      onKeyDown={(e) => this.handleKeyDown(e)}
+                      onBlur={handleBlur}
+                    />
+                    {errors.password && (
+                      <div style={{ color: "red" }}>{errors.password}</div>
+                    )}
+                    <span
+                      onClick={() => {
+                        this.handleShowHidePassword();
+                      }}
+                    >
+                      <i
+                        className={
+                          this.state.isShowPassowrd
+                            ? "far fa-eye"
+                            : "far fa-eye-slash"
+                        }
+                      ></i>
+                    </span>
+                  </div>
+                </div>
+                <div className="col-12" style={{ color: "red" }}>
+                  {this.state.errMessage}
+                </div>
+                <div className="col-12">
+                  <button
+                    onClick={() => {
+                      this.handldLogin();
+                    }}
+                    className="btn-login"
+                  >
+                    Login
+                  </button>
+                </div>
+                <div className="col-12">
+                  <span className="forgot-password">Forgot your password?</span>
+                </div>
               </div>
-            </div>
-            <div className="col-12" style={{ color: "red" }}>
-              {this.state.errMessage}
-            </div>
-            <div className="col-12">
-              <button
-                onClick={() => {
-                  this.handldLogin();
-                }}
-                className="btn-login"
-              >
-                Login
-              </button>
-            </div>
-            <div className="col-12">
-              <span className="forgot-password">Forgot your password?</span>
-            </div>
-          </div>
+            )}
+          </Formik>
         </div>
       </div>
     );

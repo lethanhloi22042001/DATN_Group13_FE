@@ -29,11 +29,13 @@
     
         .preview-img {
             border: 1px solid #ddd;
-            width: 192px;
+            width: 257px;
             height: 108px;
             background: center center no-repeat;
             background-size: contain;
             cursor: pointer;
+            border-radius: 10px;
+            background-color: rgb(255,255,255);
         }
     }
 }
