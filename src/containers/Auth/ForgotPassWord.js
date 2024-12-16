@@ -9,7 +9,6 @@ import { FormattedMessage } from "react-intl";
 import { handldLoginApi } from "../../services/userService";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Email không hợp lệ").required("Email là bắt buộc"),
@@ -25,7 +24,7 @@ const validationSchema = Yup.object().shape({
     .required("Mật khẩu là bắt buộc"),
 });
 
-class Login extends Component {
+class ForgotPassWord extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -96,11 +95,16 @@ class Login extends Component {
           >
             {({ values, errors, touched, handleChange, handleBlur }) => (
               <div className="login-content">
-                <div className="col-12 text-login">Login</div>
+                <div
+                  className="col-12 text-login"
+                  style={{ fontSize: "30px", marginBottom: "80px" }}
+                >
+                  Forgot your password?
+                </div>
                 <div className="col-12 form-group login-input">
-                  <lable>Username:</lable>
+                  {/* <lable>Quên Mật Khẩu</lable> */}
                   <input
-                    placeholder="Enter your username..."
+                    placeholder="Enter your Email..."
                     type="text"
                     className="form-control"
                     value={this.state.username}
@@ -112,36 +116,7 @@ class Login extends Component {
                     <div style={{ color: "red" }}>{errors.email}</div>
                   )}
                 </div>
-                <div className="col-12 form-group login-input">
-                  <lable>Password:</lable>
-                  <div className="custom-input-password">
-                    <input
-                      className="form-control"
-                      placeholder="Enter your password..."
-                      type={this.state.isShowPassowrd ? "text" : "password"}
-                      value={this.state.password}
-                      onChange={(event) => this.handleOnChangePassword(event)}
-                      onKeyDown={(e) => this.handleKeyDown(e)}
-                      onBlur={handleBlur}
-                    />
-                    {errors.password && (
-                      <div style={{ color: "red" }}>{errors.password}</div>
-                    )}
-                    <span
-                      onClick={() => {
-                        this.handleShowHidePassword();
-                      }}
-                    >
-                      <i
-                        className={
-                          this.state.isShowPassowrd
-                            ? "far fa-eye"
-                            : "far fa-eye-slash"
-                        }
-                      ></i>
-                    </span>
-                  </div>
-                </div>
+
                 <div className="col-12" style={{ color: "red" }}>
                   {this.state.errMessage}
                 </div>
@@ -152,14 +127,8 @@ class Login extends Component {
                     }}
                     className="btn-login"
                   >
-                    Login
+                    Gữi Lại Mật Khẩu
                   </button>
-                </div>
-                <div className="col-12">
-                  <span className="forgot-password"></span>
-                  <Link className="forgot-password" to="/ForgotPassWord">
-                    Forgot your password?
-                  </Link>
                 </div>
               </div>
             )}
@@ -185,4 +154,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassWord);

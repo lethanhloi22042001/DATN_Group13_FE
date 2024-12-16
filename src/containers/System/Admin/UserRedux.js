@@ -169,7 +169,7 @@ class UserRedux extends Component {
     for (let i = 0; i < arrCheck.length; i++) {
       if (!this.state[arrCheck[i]]) {
         isValid = false;
-        alert("This input is required: " + arrCheck[i]);
+        alert("Bạn cần phải điền địa chỉ email " + arrCheck[i]);
         break;
       }
     }
@@ -222,7 +222,9 @@ class UserRedux extends Component {
 
     return (
       <div className="user-redux-container">
-        <div className="title">Manage User using Redux</div>
+        <div className="title">
+          <FormattedMessage id="manage-user.redux" />
+        </div>
         <div className="user-redux-body">
           <div>
             <div className="container">
@@ -271,9 +273,9 @@ class UserRedux extends Component {
                     onChange={(event) => this.onChangeInput(event, "password")}
                     className="form-control"
                     type="password"
-                    disabled={
-                      this.state.action === CRUD_ACTION.EDIT ? true : false
-                    }
+                    // disabled={
+                    //   this.state.action === CRUD_ACTION.EDIT ? true : false
+                    // }
                     style={{
                       borderRadius: "10px",
                       height: "46px",

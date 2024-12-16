@@ -40,7 +40,8 @@
         },
         "doctor": {
             "manage-schedule": "Manage Doctor's schedule",
-            "manage-patient": "Manage Doctor's patient"
+            "manage-patient": "Manage Doctor's patient",
+            "change-password":"Thay Đổi Mật Khẩu"
         }
     },
     "manage-user": {
@@ -56,7 +57,9 @@
         "role": "Role",
         "image": "Avatar",
         "save": "Save",
-        "edit": "Update user"
+        "edit": "Update user",
+        "redux":"Manage User",
+        "change-password":"Thay Đổi Mật Khẩu"
     },
     "homepage": {
         "outstanding-doctor": "Outstanding Doctor",
@@ -95,7 +98,8 @@
             "btn-save": "Confirm",
             "phone": "Phone number",
             "price-booking": "Free booking",
-            "price":"Examination price"
+            "price":"Examination price",
+            "gioitinh":"Giới Tính"
         },
         "specialty-modal": {
             "learn-more": "Learn more"

@@ -78,6 +78,11 @@ export const doctorMenu = [
         name: "menu.doctor.manage-patient",
         link: "/doctor/manage-patient",
       },
+      {
+        //Đổi mật khẩu của bác sĩ
+        name: "menu.doctor.change-password",
+        link: "/doctor/change-password",
+      },
     ],
   },
 ];

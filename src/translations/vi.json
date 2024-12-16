@@ -40,7 +40,8 @@
         },
         "doctor": {
             "manage-schedule": "Quản lý kế hoạch khám bệnh",
-            "manage-patient": "Quản lý bệnh nhân khám bệnh"
+            "manage-patient": "Quản lý bệnh nhân khám bệnh",
+            "change-password":"Thay Đổi Mật Khẩu"
         }
     },
     "manage-user": {
@@ -56,7 +57,9 @@
         "role": "Vai trò",
         "image": "Ảnh đại diện",
         "save": "Thêm người dùng",
-        "edit": "Cập nhật người dùng"
+        "edit": "Cập nhật người dùng",
+        "redux":"Quản lí người dùng"
+        ,"change-password":"Thay Đổi Mật Khẩu"
     },
     "homepage": {
         "outstanding-doctor": "Bác sĩ nổi bậc tuần qua",
@@ -94,8 +97,9 @@
             "btn-close": "Hủy",
             "btn-save": "Xác nhận",
             "phone": "Số điện thoại",
-            "price-booking": "Miễn phí đặt lịch",
-            "price":"Giá khám"
+            "price-booking": "Giới Tính",
+            "price":"Giá khám",
+            "gioitinh":"Giới Tính"
         },
         "specialty-modal": {
             "learn-more": "Xem thêm"

@@ -11,6 +11,7 @@ import {
 import { path } from "../utils";
 import Home from "../routes/Home";
 import Login from "./Auth/Login";
+import ForgotPassWord from "./Auth/ForgotPassWord";
 import System from "../routes/System";
 import { CustomToastCloseButton } from "../components/CustomToast";
 import HomePage from "./HomePage/HomePage.js";
@@ -60,6 +61,7 @@ class App extends Component {
                     path={path.LOGIN}
                     component={userIsNotAuthenticated(Login)}
                   />
+                  <Route path={"/ForgotPassWord"} component={ForgotPassWord} />
                   <Route
                     path={path.SYSTEM}
                     component={userIsAuthenticated(System)}
@@ -83,7 +85,10 @@ class App extends Component {
                     path={path.VERIFY_EMAIL_BOOKING}
                     component={VerifyEmail}
                   />
-                  <Route path={"/appoinment-schedule"} component={AppointmentSchedulePage} />
+                  <Route
+                    path={"/appoinment-schedule"}
+                    component={AppointmentSchedulePage}
+                  />
                   <Route path={"/support/chat-page"} component={Support} />
                   <Route path={"/support"} component={SupportChatPage} />
                 </Switch>

@@ -388,7 +388,7 @@ class BookingModal extends Component {
                         </div>
                         <div className="col-6 form-group">
                           <label>
-                            <FormattedMessage id="patient.booking-modal.price-booking" />
+                            <FormattedMessage id="patient.booking-modal.gioitinh" />
                           </label>
                           <Select
                             options={this.state.genders}
