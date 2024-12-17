@@ -20,12 +20,16 @@ class ManageSchedule extends Component {
       currentDate: "",
       rangeTime: [],
       rawDoctors: [],
+      arrDoctors: [],
+      showRow2: false, // Trạng thái kiểm tra hiển thị <div>
+      selectedDoctorImage: null,
     };
   }
 
   componentDidMount() {
     this.props.fetchAllDoctors();
     this.props.fetchAllScheduleTime();
+    this.props.loadTopDoctors();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -63,6 +67,11 @@ class ManageSchedule extends Component {
         rangeTime: data,
       });
     }
+    if (prevProps.topDoctorsRedux !== this.props.topDoctorsRedux) {
+      this.setState({
+        arrDoctors: this.props.topDoctorsRedux,
+      });
+    }
   }
 
   buildDataInputSelect = (inputData) => {
@@ -81,8 +90,33 @@ class ManageSchedule extends Component {
     return result;
   };
 
-  handleChangeSelect = async (selectedOption) => {
-    this.setState({ selectedDoctor: selectedOption });
+  // handleChangeSelect = async (selectedOption) => {
+  //   this.setState({ selectedDoctor: selectedOption });
+  // };
+  handleChangeSelect = (selectedOption) => {
+    const { arrDoctors, listDoctors } = this.state;
+
+    // Kiểm tra bác sĩ trùng id
+    const isMatchingDoctor = arrDoctors.some(
+      (doctor) => doctor.id === selectedOption.value
+    );
+
+    // Lấy thông tin bác sĩ được chọn từ listDoctors
+    const selectedDoctorData = listDoctors.find(
+      (doctor) => doctor.value === selectedOption.value
+    );
+
+    // Nếu `selectedDoctorData` tồn tại, tìm thông tin chi tiết trong `arrDoctors`
+    const matchingDoctorDetails = isMatchingDoctor
+      ? arrDoctors.find((doctor) => doctor.id === selectedOption.value)
+      : null;
+
+    this.setState({
+      selectedDoctor: selectedOption,
+      showRow2: isMatchingDoctor,
+      selectedDoctorImage: selectedDoctorData ? selectedDoctorData.image : null,
+      matchingDoctorDetails: matchingDoctorDetails, // Lưu thông tin chi tiết bác sĩ trong arrDoctors
+    });
   };
 
   handleChangeDatePicker = (date) => {
@@ -145,14 +179,18 @@ class ManageSchedule extends Component {
       toast.error("Schedule saved Failed!");
       console.log("error saveBulkScheduleDoctor: ", res);
     }
-
-    console.log("check result: ", result);
   };
 
   render() {
-    let { rangeTime } = this.state;
+    let { rangeTime, matchingDoctorDetails } = this.state;
     let { language } = this.props;
     let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+    let imageBase64 = "";
+    if (matchingDoctorDetails?.image) {
+      imageBase64 = new Buffer(matchingDoctorDetails?.image, "base64").toString(
+        "binary"
+      );
+    }
     return (
       <div className="manage-schedule-container">
         <div className="m-s-title">
@@ -209,25 +247,27 @@ class ManageSchedule extends Component {
               </button>
             </div>
           </div>
-          <div className="row2">
-            <h1>xin chao cac ban</h1>
-            <ul>
-              {this.state.rawDoctors && this.state.rawDoctors.length > 0 ? (
-                this.state.rawDoctors.map((doctor, index) => {
-                  {
-                    console.log(doctor);
-                  }
-                  return (
-                    <li key={index}>
-                      {doctor.firstName} {doctor.lastName} - {doctor.email}
-                    </li>
-                  );
-                })
-              ) : (
-                <li>No doctors available</li>
-              )}
-            </ul>
-          </div>
+          {/* Hiển thị <div> khi giá trị trùng */}
+          {console.log("matchingDoctorDetails", matchingDoctorDetails)}
+          {this?.state?.showRow2 && (
+            <div
+              className="doctor-detail-container"
+              style={{
+                backgroundImage: `url(${imageBase64})`,
+                width: "500px",
+                height: "500px",
+              }}
+            >
+              <div
+                className="bg-image section-outstanding-doctor"
+                // style={{ backgroundImage: `url(${imageBase64})` }}
+                style={{
+                  backgroundImage: `url(data:image/jpeg;base64,${imageBase64})`,
+                }}
+              />
+              hi
+            </div>
+          )}
         </div>
       </div>
     );
@@ -240,6 +280,7 @@ const mapStateToProps = (state) => {
     allDoctors: state.admin.allDoctors,
     language: state.app.language,
     allScheduleTime: state.admin.allScheduleTime,
+    topDoctorsRedux: state.admin.topDoctors,
   };
 };
 
@@ -247,6 +288,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllDoctors: () => dispatch(actions.fetchAllDoctors()),
     fetchAllScheduleTime: () => dispatch(actions.fetchAllScheduleTime()),
+    loadTopDoctors: () => dispatch(actions.fetchTopDoctor()),
   };
 };
 

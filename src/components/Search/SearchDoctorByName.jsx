@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './Search.scss';
-import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import SearchModal from '../SearchModal/SearchModal';
+import React, { useState } from "react";
+import axios from "axios";
+import "./Search.scss";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import SearchModal from "../SearchModal/SearchModal";
 
 const SearchDoctorByName = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [data, setData] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -22,7 +22,7 @@ const SearchDoctorByName = () => {
   };
 
   const handleGetDoctorByName = () => {
-    const removeSpace = inputValue.replace(/\s/g, '');
+    const removeSpace = inputValue.replace(/\s/g, "");
     axios
       .get(`http://localhost:8080/api/search`, {
         params: {
@@ -40,7 +40,7 @@ const SearchDoctorByName = () => {
           // arrDoctor.push(dataDoctor.data)
           setData(...dataDoctor.data);
           setIsOpenModal(true);
-          setInputValue('');
+          setInputValue("");
         }
       })
       .catch(function (error) {
@@ -65,6 +65,11 @@ const SearchDoctorByName = () => {
             placeholder="Tìm kiếm bác sĩ..."
             type="text"
             onChange={(e) => handleOnchangeSearchInput(e)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleClickSearch();
+              }
+            }}
           />
           <i onClick={handleClickSearch} className="fas fa-search" />
         </div>
@@ -76,7 +81,11 @@ const SearchDoctorByName = () => {
                     </div>
                 ) : null} */}
       </div>
-      <SearchModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} doctorData={data} />
+      <SearchModal
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+        doctorData={data}
+      />
     </>
   );
 };
