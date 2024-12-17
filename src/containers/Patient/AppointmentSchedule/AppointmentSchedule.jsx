@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import HomeHeader from '../../HomePage/HomeHeader';
 import './AppointmentSchedule.scss';
-import IconKham from '../../../assets/images/icons/ic_kham.png';
 import { getListPatientByUserId } from '../../../services/userService';
 import AppointmentItem from './components/AppointmentItem';
 

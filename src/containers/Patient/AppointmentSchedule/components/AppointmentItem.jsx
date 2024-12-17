@@ -5,13 +5,22 @@ import moment from 'moment';
 
 import './AppointmentItem.scss';
 import { LANGUAGES } from '../../../../utils';
-import { getExtraInfoDoctorById } from '../../../../services/userService';
 import IconKham from '../../../../assets/images/icons/ic_kham.png';
+import { withRouter } from 'react-router';
 
 class AppointmentItem extends Component {
   constructor(props) {
     super(props);
   }
+
+  handleRedirect = () => {
+    if (this.props.history) {
+      this.props.history.push({
+        pathname: '/instruct',
+        state: { data: this.props?.data },
+      });
+    }
+  };
 
   render() {
     const { data, language } = this.props;
@@ -66,9 +75,9 @@ class AppointmentItem extends Component {
               <span>Bệnh viện Hoàn Mỹ</span>
             </span>
           </div>
-          <div className="spp-button">
+          <button className="spp-button" onClick={this.handleRedirect}>
             <FormattedMessage id="patient.appointment-schedule.booked" />
-          </div>
+          </button>
         </div>
       </div>
     );
@@ -85,4 +94,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppointmentItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppointmentItem));

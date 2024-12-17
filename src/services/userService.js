@@ -153,6 +153,10 @@ const getListPatientByUserId = (data) => {
   return axios.get(`/api/get-list-patient-by-user-id?ids=${data.appoinmentIds}`);
 };
 
+const forgotPasswordAPI = (data) => {
+  return axios.post('/api/auth/forgot-password', data);
+};
+
 export {
   handldLoginApi,
   getAllUsers,
@@ -182,4 +186,5 @@ export {
   getAllPatientForManage,
   updateStatusPatient,
   getListPatientByUserId,
+  forgotPasswordAPI,
 };
