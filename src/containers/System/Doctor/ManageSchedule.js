@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import "./ManageSchedule.scss";
-import { FormattedMessage } from "react-intl";
-import Select from "react-select";
-import * as actions from "../../../store/actions";
-import { dateFormat, LANGUAGES } from "../../../utils";
-import DatePicker from "../../../components/Input/DatePicker";
-import moment from "moment";
-import { toast } from "react-toastify";
-import _ from "lodash";
-import { saveBulkScheduleDoctor } from "../../../services/userService";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import './ManageSchedule.scss';
+import { FormattedMessage } from 'react-intl';
+import Select from 'react-select';
+import * as actions from '../../../store/actions';
+import { dateFormat, LANGUAGES } from '../../../utils';
+import DatePicker from '../../../components/Input/DatePicker';
+import moment from 'moment';
+import { toast } from 'react-toastify';
+import _ from 'lodash';
+import { saveBulkScheduleDoctor } from '../../../services/userService';
 
 class ManageSchedule extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class ManageSchedule extends Component {
     this.state = {
       listDoctors: [],
       selectedDoctor: {},
-      currentDate: "",
+      currentDate: '',
       rangeTime: [],
       rawDoctors: [],
       arrDoctors: [],
@@ -97,14 +97,10 @@ class ManageSchedule extends Component {
     const { arrDoctors, listDoctors } = this.state;
 
     // Kiểm tra bác sĩ trùng id
-    const isMatchingDoctor = arrDoctors.some(
-      (doctor) => doctor.id === selectedOption.value
-    );
+    const isMatchingDoctor = arrDoctors.some((doctor) => doctor.id === selectedOption.value);
 
     // Lấy thông tin bác sĩ được chọn từ listDoctors
-    const selectedDoctorData = listDoctors.find(
-      (doctor) => doctor.value === selectedOption.value
-    );
+    const selectedDoctorData = listDoctors.find((doctor) => doctor.value === selectedOption.value);
 
     // Nếu `selectedDoctorData` tồn tại, tìm thông tin chi tiết trong `arrDoctors`
     const matchingDoctorDetails = isMatchingDoctor
@@ -142,11 +138,11 @@ class ManageSchedule extends Component {
     let { rangeTime, selectedDoctor, currentDate } = this.state;
     let result = [];
     if (selectedDoctor && _.isEmpty(selectedDoctor)) {
-      toast.error("Invalid selected doctor!");
+      toast.error('Invalid selected doctor!');
       return;
     }
     if (!currentDate) {
-      toast.error("Invalid date!");
+      toast.error('Invalid date!');
       return;
     }
 
@@ -163,7 +159,7 @@ class ManageSchedule extends Component {
           result.push(object);
         });
       } else {
-        toast.error("Invalid selected time!");
+        toast.error('Invalid selected time!');
       }
     }
 
@@ -174,10 +170,10 @@ class ManageSchedule extends Component {
     });
 
     if (res && res.errCode === 0) {
-      toast.success("Schedule saved successfully!");
+      toast.success('Schedule saved successfully!');
     } else {
-      toast.error("Schedule saved Failed!");
-      console.log("error saveBulkScheduleDoctor: ", res);
+      toast.error('Schedule saved Failed!');
+      console.log('error saveBulkScheduleDoctor: ', res);
     }
   };
 
@@ -185,11 +181,9 @@ class ManageSchedule extends Component {
     let { rangeTime, matchingDoctorDetails } = this.state;
     let { language } = this.props;
     let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
-    let imageBase64 = "";
+    let imageBase64 = '';
     if (matchingDoctorDetails?.image) {
-      imageBase64 = new Buffer(matchingDoctorDetails?.image, "base64").toString(
-        "binary"
-      );
+      imageBase64 = new Buffer(matchingDoctorDetails?.image, 'base64').toString('binary');
     }
     return (
       <div className="manage-schedule-container">
@@ -227,8 +221,8 @@ class ManageSchedule extends Component {
                     <button
                       className={
                         item.isSelected === true
-                          ? "btn btn-schedule btn-save-schedule active"
-                          : "btn btn-schedule btn-save-schedule"
+                          ? 'btn btn-schedule btn-save-schedule active'
+                          : 'btn btn-schedule btn-save-schedule'
                       }
                       key={index}
                       onClick={() => this.handleClickButtonTime(item)}
@@ -239,33 +233,39 @@ class ManageSchedule extends Component {
                 })}
             </div>
             <div className="col-12">
-              <button
-                className="btn btn-primary"
-                onClick={() => this.handleSaveSchedule()}
-              >
+              <button className="btn btn-primary" onClick={() => this.handleSaveSchedule()}>
                 <FormattedMessage id="manage-schedule.save" />
               </button>
             </div>
           </div>
           {/* Hiển thị <div> khi giá trị trùng */}
-          {console.log("matchingDoctorDetails", matchingDoctorDetails)}
           {this?.state?.showRow2 && (
-            <div
-              className="doctor-detail-container"
-              style={{
-                backgroundImage: `url(${imageBase64})`,
-                width: "500px",
-                height: "500px",
-              }}
-            >
-              <div
-                className="bg-image section-outstanding-doctor"
-                // style={{ backgroundImage: `url(${imageBase64})` }}
-                style={{
-                  backgroundImage: `url(data:image/jpeg;base64,${imageBase64})`,
-                }}
-              />
-              hi
+            <div class="user-wrapper">
+              <div class="user-card">
+                <div class="user-card-img">
+                  <img src={imageBase64} alt="" />
+                </div>
+                <div class="user-card-info">
+                  <h2>
+                    {matchingDoctorDetails?.firstName} {matchingDoctorDetails?.lastName}
+                  </h2>
+                  <p>
+                    <span>Email:</span> {matchingDoctorDetails?.email}
+                  </p>
+                  <p>
+                    <span>Địa chỉ:</span> {matchingDoctorDetails?.address}
+                  </p>
+                  <p>
+                    <span>Vị trí:</span>{' '}
+                    {language === LANGUAGES.VI
+                      ? matchingDoctorDetails?.positionData?.valueVi
+                      : matchingDoctorDetails?.positionData?.valueEn}
+                  </p>
+                  <p>
+                    <span>Số điện thoại:</span> {matchingDoctorDetails?.phonenumber}
+                  </p>
+                </div>
+              </div>
             </div>
           )}
         </div>

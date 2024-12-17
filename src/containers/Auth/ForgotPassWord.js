@@ -5,8 +5,8 @@ import { push } from 'connected-react-router';
 import * as actions from '../../store/actions';
 
 import './Login.scss';
-import { forgotPasswordAPI, handldLoginApi } from '../../services/userService';
-import { Formik } from 'formik';
+import { forgotPasswordAPI } from '../../services/userService';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
@@ -18,22 +18,14 @@ class ForgotPassWord extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
       status: false,
     };
   }
 
-  handleOnchangeEmail = (event) => {
-    this.setState({
-      email: event.target.value,
-    });
-  };
-
-  handleForgotPassword = async () => {
-    console.log(this.state.email);
+  handleForgotPassword = async ({ email }) => {
     try {
       let data = await forgotPasswordAPI({
-        email: this.state.email,
+        email,
       });
       if (data && data.errCode === 200) {
         this.setState({
@@ -41,16 +33,9 @@ class ForgotPassWord extends Component {
         });
       }
     } catch (error) {
-      console.log(error.response.data);
       if (error.response && error.response.data) {
         toast.error(error?.response?.data?.errMessage);
       }
-    }
-  };
-
-  handleKeyDown = (e) => {
-    if (e.key === 'Enter' || e.keyCode === 13) {
-      this.handleForgotPassword();
     }
   };
 
@@ -60,42 +45,42 @@ class ForgotPassWord extends Component {
       <div className="login-background">
         <div className="login-container">
           {this.state.status ? (
-            <div className='login-success'>
+            <div className="login-success">
               <h2>Bạn đã cập nhật lại mật khẩu thành công!</h2>
               <p>Vui lòng kiểm tra thông tin ở email</p>
             </div>
           ) : (
-            <Formik initialValues={{ email: '' }} validationSchema={validationSchema}>
-              {({ values, errors, touched, handleChange, handleBlur }) => (
-                <div className="login-content">
-                  <div className="col-12 text-login" style={{ fontSize: '30px', marginBottom: '80px' }}>
-                    Forgot your password?
+            <Formik
+              initialValues={{ email: '' }}
+              validationSchema={validationSchema}
+              onSubmit={(values, { setSubmitting }) => {
+                this.handleForgotPassword(values);
+                setSubmitting(false);
+              }}
+            >
+              {({ isSubmitting, handleBlur }) => (
+                <Form>
+                  <div className="login-content">
+                    <div className="col-12 text-login" style={{ fontSize: '30px', marginBottom: '80px' }}>
+                      Forgot your password?
+                    </div>
+                    <div className="col-12 form-group login-input">
+                      <Field
+                        placeholder="Enter your Email..."
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        onBlur={handleBlur}
+                      />
+                      <ErrorMessage component="div" name="email" style={{ color: 'red' }} />
+                    </div>
+                    <div className="col-12">
+                      <button type="submit" className="btn-login" disabled={isSubmitting}>
+                        Gửi Lại Mật Khẩu
+                      </button>
+                    </div>
                   </div>
-                  <div className="col-12 form-group login-input">
-                    {/* <lable>Quên Mật Khẩu</lable> */}
-                    <input
-                      placeholder="Enter your Email..."
-                      type="text"
-                      className="form-control"
-                      value={this.state.email}
-                      onChange={(event) => this.handleOnchangeEmail(event)}
-                      name="email"
-                      onBlur={handleBlur}
-                      onKeyDown={(e) => this.handleKeyDown(e)}
-                    />
-                    {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
-                  </div>
-                  <div className="col-12">
-                    <button
-                      onClick={() => {
-                        this.handleForgotPassword();
-                      }}
-                      className="btn-login"
-                    >
-                      Gửi Lại Mật Khẩu
-                    </button>
-                  </div>
-                </div>
+                </Form>
               )}
             </Formik>
           )}

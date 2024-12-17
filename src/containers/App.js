@@ -62,7 +62,7 @@ class App extends Component {
                     path={path.LOGIN}
                     component={userIsNotAuthenticated(Login)}
                   />
-                  <Route path={"/ForgotPassWord"} component={ForgotPassWord} />
+                  <Route path={"/forgot-password"} component={ForgotPassWord} />
                   <Route
                     path={path.SYSTEM}
                     component={userIsAuthenticated(System)}
