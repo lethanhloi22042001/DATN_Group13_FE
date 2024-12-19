@@ -11,6 +11,7 @@ import { ErrorMessage, Field, Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { toast } from 'react-toastify';
+import { USER_ROLE } from '../../utils';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Email không hợp lệ').required('Email là bắt buộc'),
@@ -41,6 +42,16 @@ class Login extends Component {
       }
       if (data && data.errCode === 0) {
         this.props.userLoginSuccess(data.user);
+        if (data.user?.roleId === USER_ROLE.ADMIN) {
+          if (this.props.history) {
+            this.props.history.push(`/system/user-redux`);
+          }
+        }
+        if (data.user?.roleId === USER_ROLE.DOCTOR) {
+          if (this.props.history) {
+            this.props.history.push(`/doctor/manage-schedule`);
+          }
+        }
         toast.success('Login success');
       }
     } catch (error) {
